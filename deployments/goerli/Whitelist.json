@@ -1,0 +1,158 @@
+{
+  "address": "0x8a55c73a8b8d7fC032E35d569EF68EeCF34E4e47",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_maxWhitelistedAddresses",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "addAddressToWhitelist",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "maxWhitelistedAddresses",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "numAddressesWhitelisted",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "whitelistedAddresses",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x6374556381b52f74e92ea7819e61a884395589029109d28e2e99457649b59f41",
+  "receipt": {
+    "to": null,
+    "from": "0xcDEb58B78dC2E17A9aE0012F2b501bF8F68B3875",
+    "contractAddress": "0x8a55c73a8b8d7fC032E35d569EF68EeCF34E4e47",
+    "transactionIndex": 105,
+    "gasUsed": "371912",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x8ae457ff5c325c19e8ad45d2891eab0a4759c34d3eb1625b097dfc2dd2e67adf",
+    "transactionHash": "0x6374556381b52f74e92ea7819e61a884395589029109d28e2e99457649b59f41",
+    "logs": [],
+    "blockNumber": 7844321,
+    "cumulativeGasUsed": "18456674",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    10
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "c2e130e3d9d6ea07b06b172efe5555c8",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"_maxWhitelistedAddresses\",\"type\":\"uint8\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"addAddressToWhitelist\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maxWhitelistedAddresses\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"numAddressesWhitelisted\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"whitelistedAddresses\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"addAddressToWhitelist()\":{\"notice\":\"addAddressToWhitelist - This function adds the address of the sender to the whitelist\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Whitelist.sol\":\"Whitelist\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Whitelist.sol\":{\"content\":\"//SPDX-License-Identifier: Unlicense\\r\\npragma solidity ^0.8.0;\\r\\n\\r\\ncontract Whitelist {\\r\\n  // Max number of whitelisted addresses allowed\\r\\n  uint8 public maxWhitelistedAddresses;\\r\\n\\r\\n  // Create a mapping of whitelistedAddresses\\r\\n  // if an address is whitelisted, we would set it to true, it is false by default for all other addresses.\\r\\n  mapping(address => bool) public whitelistedAddresses;\\r\\n\\r\\n  // numAddressesWhitelisted would be used to keep track of how many addresses have been whitelisted\\r\\n  // NOTE: Don't change this variable name, as it will be part of verification\\r\\n  uint8 public numAddressesWhitelisted;\\r\\n\\r\\n  // Setting the Max number of whitelisted addresses\\r\\n  // User will put the value at the time of deployment\\r\\n  constructor(uint8 _maxWhitelistedAddresses) {\\r\\n    maxWhitelistedAddresses = _maxWhitelistedAddresses;\\r\\n  }\\r\\n\\r\\n  /**\\r\\n        addAddressToWhitelist - This function adds the address of the sender to the\\r\\n        whitelist\\r\\n     */\\r\\n  function addAddressToWhitelist() public {\\r\\n    // check if the user has already been whitelisted\\r\\n    require(\\r\\n      !whitelistedAddresses[msg.sender],\\r\\n      \\\"Sender has already been whitelisted\\\"\\r\\n    );\\r\\n    // check if the numAddressesWhitelisted < maxWhitelistedAddresses, if not then throw an error.\\r\\n    require(\\r\\n      numAddressesWhitelisted < maxWhitelistedAddresses,\\r\\n      \\\"More addresses cant be added, limit reached\\\"\\r\\n    );\\r\\n    // Add the address which called the function to the whitelistedAddress array\\r\\n    whitelistedAddresses[msg.sender] = true;\\r\\n    // Increase the number of whitelisted addresses\\r\\n    numAddressesWhitelisted += 1;\\r\\n  }\\r\\n}\\r\\n\",\"keccak256\":\"0x39c11d7fcf22de665bcb4da8b5b5143681a305703b192257da834b87b53e6ed7\",\"license\":\"Unlicense\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060405161062438038061062483398181016040528101906100329190610090565b806000806101000a81548160ff021916908360ff160217905550506100bd565b600080fd5b600060ff82169050919050565b61006d81610057565b811461007857600080fd5b50565b60008151905061008a81610064565b92915050565b6000602082840312156100a6576100a5610052565b5b60006100b48482850161007b565b91505092915050565b610558806100cc6000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c806306c933d81461005157806331a72188146100815780634011d7cd1461009f5780638e7314d9146100bd575b600080fd5b61006b600480360381019061006691906102ef565b6100c7565b6040516100789190610337565b60405180910390f35b6100896100e7565b604051610096919061036e565b60405180910390f35b6100a76100f8565b6040516100b4919061036e565b60405180910390f35b6100c561010b565b005b60016020528060005260406000206000915054906101000a900460ff1681565b60008054906101000a900460ff1681565b600260009054906101000a900460ff1681565b600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615610198576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161018f9061040c565b60405180910390fd5b60008054906101000a900460ff1660ff16600260009054906101000a900460ff1660ff16106101fc576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016101f39061049e565b60405180910390fd5b60018060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055506001600260008282829054906101000a900460ff1661027291906104ed565b92506101000a81548160ff021916908360ff160217905550565b600080fd5b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006102bc82610291565b9050919050565b6102cc816102b1565b81146102d757600080fd5b50565b6000813590506102e9816102c3565b92915050565b6000602082840312156103055761030461028c565b5b6000610313848285016102da565b91505092915050565b60008115159050919050565b6103318161031c565b82525050565b600060208201905061034c6000830184610328565b92915050565b600060ff82169050919050565b61036881610352565b82525050565b6000602082019050610383600083018461035f565b92915050565b600082825260208201905092915050565b7f53656e6465722068617320616c7265616479206265656e2077686974656c697360008201527f7465640000000000000000000000000000000000000000000000000000000000602082015250565b60006103f6602383610389565b91506104018261039a565b604082019050919050565b60006020820190508181036000830152610425816103e9565b9050919050565b7f4d6f7265206164647265737365732063616e742062652061646465642c206c6960008201527f6d69742072656163686564000000000000000000000000000000000000000000602082015250565b6000610488602b83610389565b91506104938261042c565b604082019050919050565b600060208201905081810360008301526104b78161047b565b9050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60006104f882610352565b915061050383610352565b9250828201905060ff81111561051c5761051b6104be565b5b9291505056fea2646970667358221220fa02929b2fc01ccbd1295a75f5bff72718ad3066438af9a2012efa56d79eacd964736f6c63430008110033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c806306c933d81461005157806331a72188146100815780634011d7cd1461009f5780638e7314d9146100bd575b600080fd5b61006b600480360381019061006691906102ef565b6100c7565b6040516100789190610337565b60405180910390f35b6100896100e7565b604051610096919061036e565b60405180910390f35b6100a76100f8565b6040516100b4919061036e565b60405180910390f35b6100c561010b565b005b60016020528060005260406000206000915054906101000a900460ff1681565b60008054906101000a900460ff1681565b600260009054906101000a900460ff1681565b600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615610198576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161018f9061040c565b60405180910390fd5b60008054906101000a900460ff1660ff16600260009054906101000a900460ff1660ff16106101fc576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016101f39061049e565b60405180910390fd5b60018060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055506001600260008282829054906101000a900460ff1661027291906104ed565b92506101000a81548160ff021916908360ff160217905550565b600080fd5b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006102bc82610291565b9050919050565b6102cc816102b1565b81146102d757600080fd5b50565b6000813590506102e9816102c3565b92915050565b6000602082840312156103055761030461028c565b5b6000610313848285016102da565b91505092915050565b60008115159050919050565b6103318161031c565b82525050565b600060208201905061034c6000830184610328565b92915050565b600060ff82169050919050565b61036881610352565b82525050565b6000602082019050610383600083018461035f565b92915050565b600082825260208201905092915050565b7f53656e6465722068617320616c7265616479206265656e2077686974656c697360008201527f7465640000000000000000000000000000000000000000000000000000000000602082015250565b60006103f6602383610389565b91506104018261039a565b604082019050919050565b60006020820190508181036000830152610425816103e9565b9050919050565b7f4d6f7265206164647265737365732063616e742062652061646465642c206c6960008201527f6d69742072656163686564000000000000000000000000000000000000000000602082015250565b6000610488602b83610389565b91506104938261042c565b604082019050919050565b600060208201905081810360008301526104b78161047b565b9050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60006104f882610352565b915061050383610352565b9250828201905060ff81111561051c5761051b6104be565b5b9291505056fea2646970667358221220fa02929b2fc01ccbd1295a75f5bff72718ad3066438af9a2012efa56d79eacd964736f6c63430008110033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "addAddressToWhitelist()": {
+        "notice": "addAddressToWhitelist - This function adds the address of the sender to the whitelist"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 3,
+        "contract": "contracts/Whitelist.sol:Whitelist",
+        "label": "maxWhitelistedAddresses",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_uint8"
+      },
+      {
+        "astId": 7,
+        "contract": "contracts/Whitelist.sol:Whitelist",
+        "label": "whitelistedAddresses",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_bool)"
+      },
+      {
+        "astId": 9,
+        "contract": "contracts/Whitelist.sol:Whitelist",
+        "label": "numAddressesWhitelisted",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_uint8"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_uint8": {
+        "encoding": "inplace",
+        "label": "uint8",
+        "numberOfBytes": "1"
+      }
+    }
+  }
+}
